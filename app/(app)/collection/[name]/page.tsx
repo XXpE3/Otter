@@ -39,7 +39,7 @@ export default async function CollectionPage({ params, searchParams }: Props) {
   const dbMetaTags = await supabaseClient.from('tags_count').select('*');
   const matchingTags =
     dbMetaTags?.data &&
-    dbMetaTags?.data.filter((item) => {
+    dbMetaTags?.data.filter((item: { tag: string }) => {
       return item.tag?.toLowerCase() === collection.toLowerCase();
     });
   for (const tag of matchingTags!) {
@@ -49,7 +49,7 @@ export default async function CollectionPage({ params, searchParams }: Props) {
   }
 
   const subNav = tags?.length
-    ? tags.map((item) => {
+    ? tags.map((item: string) => {
         return {
           text: item,
           href: `/tag/${encodeURIComponent(item)}`,
