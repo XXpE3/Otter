@@ -39,7 +39,7 @@ export default async function CollectionPage({ params, searchParams }: Props) {
   const dbMetaTags = await supabaseClient.from('tags_count').select('*');
   const matchingTags =
     dbMetaTags?.data &&
-    dbMetaTags?.data.filter((item: { tag: string }) => {
+    dbMetaTags?.data.filter((item: { tag: string | null }) => {
       return item.tag?.toLowerCase() === collection.toLowerCase();
     });
   for (const tag of matchingTags!) {
