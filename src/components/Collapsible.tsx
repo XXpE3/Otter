@@ -30,11 +30,14 @@ export const Collapsible = forwardRef<HTMLDivElement, CollapsibleProps1>(
       [handleUpdateUISettings, stateKey],
     );
 
+    const settingKey = `settings_${stateKey}_visible` as const;
+    const isVisible = profile ? profile[settingKey] as boolean : false;
+
     return (
       <CollapsibleRoot
         ref={ref}
         onOpenChange={handleOpenChange}
-        open={profile ? profile[`settings_${stateKey}_visible`] : false}
+        open={isVisible}
         {...props}
       >
         {children}
